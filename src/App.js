@@ -1,23 +1,41 @@
 import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './App.css';
+import ProductList from './components/ProductList';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+         <Router>
+          <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a href="/github" className="navbar-brand">
+          WebProduct
         </a>
-      </header>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/produtos"} className="nav-link">
+              Product List
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/add"} className="nav-link">
+              Add Product
+            </Link>
+          </li>
+        </div>
+      </div>
+        </nav>
+        <div className="container mt-3">
+        <Routes>
+            <Route exact path="/produtos" element={<ProductList/>}></Route>
+            <Route path="/add" element={<addProduct/>}></Route>
+          </Routes>
+        
+        </div>
+        </Router>
     </div>
   );
 }
