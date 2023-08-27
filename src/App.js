@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import './App.css';
 import ProductList from './components/ProductList';
+import AddProduto from './components/crud/AddProduto';
+import EditProduto from './components/crud/EditProduto';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
         <div className="container mt-3">
         <Routes>
             <Route exact path="/produtos" element={<ProductList/>}></Route>
-            <Route path="/add" element={<addProduct/>}></Route>
+            <Route path="/add" element={<AddProduto/>}></Route>
+            <Route path="/editar/:id" element={<EditProduto/>}></Route>
           </Routes>
         
         </div>

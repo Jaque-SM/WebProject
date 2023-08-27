@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 
-export default function AddProduto (){
+export default function EditProduto(){
 
     let navigate = useNavigate();
+
+    const { id } = useParams();
 
     const [produto, setProdutos] = useState({
         productcode: " ",
@@ -17,7 +19,7 @@ export default function AddProduto (){
 
     const {productcode, nome, fornecedor, valor } = produto;
 
-
+    
     const onInputChangeCode = (e) => {
         setProdutos(
             {...produto, productcode: e.target.value}
@@ -42,11 +44,19 @@ export default function AddProduto (){
         )
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8080/product/add", produto);
-        navigate("/produtos");
+    useEffect(() => {
+        loadProduto();
+      }, []);
+    
+      const loadProduto = async () => {
+          const result = await axios.get(`http://localhost:8080/product/produto/${id}`);
+          setProdutos(result.data);
+      };
 
+      const onSubmit = async (e) => {
+        e.preventDefault();
+        await axios.put(`http://localhost:8080/product/update/${id}`, produto);
+        navigate("/produtos");
     };
 
     return (
@@ -99,14 +109,7 @@ export default function AddProduto (){
             </div>
         </div>
 
-    );   
-
-
-
-
-
-
-
+    );  
 
 
 }

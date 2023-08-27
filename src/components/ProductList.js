@@ -49,7 +49,7 @@ export default function ProductList (){
                 <td>{produto.valor}</td>
                 <td scope='row'> 
                 
-                <Link className='btn btn-secondary mx-2' to={`/viewproduto/${produto.id}`}>
+                <Link className='btn btn-secondary mx-2' to={`/editar/${produto.id}`}>
                     Editar 
                 </Link>
 
