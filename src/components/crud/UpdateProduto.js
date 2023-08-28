@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 
-export default function EditProduto(){
+export default function UpdateProduto(){
 
     let navigate = useNavigate();
 
@@ -54,8 +54,10 @@ export default function EditProduto(){
       };
 
       const onSubmit = async (e) => {
+        console.log(produto.fornecedor);
         e.preventDefault();
         await axios.put(`http://localhost:8080/product/update/${id}`, produto);
+        console.log("Entrou aki");
         navigate("/produtos");
     };
 
@@ -70,7 +72,7 @@ export default function EditProduto(){
             
             <form onSubmit={(e)=> onSubmit(e)}>
                 
-                <label htmlFor="nome" className="form-label">Código-Produto</label>
+                <label htmlFor="productcode" className="form-label">Código-Produto</label>
                 
                 <div className="mb-3">
                 <input type="text" placeholder="digite o código..." name="productcode" className="form-control" required
@@ -97,7 +99,7 @@ export default function EditProduto(){
 
                   <button type="submit" className="btn btn-light " >Submit</button>
 
-                        <Link className="btn btn-danger mx-2" to="/">
+                        <Link className="btn btn-danger mx-2" to="/produtos">
                             Cancelar
                         </Link>        
                         
